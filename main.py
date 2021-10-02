@@ -59,9 +59,10 @@ while player.victories!=10:
        monsterguard = False
        def turnreset():
            playerguard = False
+           monsterguard = False
            dungeon.health = dungeon.health + bp.recover(bp,dungeon.maxhealth,monsterguard)
-       if dungeon.health>dungeon.maxhealth:
-           dungeon.health = dungeon.maxhealth
+         if dungeon.health>dungeon.maxhealth:
+             dungeon.health = dungeon.maxhealth
        while not_dead:
        #player action
            move = input("Attack or Defend: ")
@@ -112,7 +113,8 @@ while player.victories!=10:
                print("Battle is over!")
            turnreset()
        if player.health<0:
-           print("Game Over!")
+           a = input("Game Over!")
+           exit()
        else:
          player.health = player.maxhealth
          print(endquotes[player.victories])

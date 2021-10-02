@@ -6,7 +6,7 @@ monsterguard = False
 
 def turnreset():
     playerguard = False
-    mons.health = mons.health + bp.recover(mon.health,monsterguard)
+    mons.health = mons.health + bp.recover(mon.maxhealth,monsterguard)
     if mons.health>mon.health:
         mons.health = mon.health
 
@@ -49,11 +49,4 @@ while not_dead:
         not_dead = False
     turnreset()
 #battle ends
-#health check at the end to determine victor
-        
-        
-
-
-
-
-        
+#health check at the end to determine victor        

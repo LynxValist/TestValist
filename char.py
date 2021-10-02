@@ -26,36 +26,42 @@ class Character():
     def win(self):
         self.victories +=1
         self.statpoints += 3
+        self.health = self.maxhealth
     def spendstats(self):
         print("Health Stat:", self.healthstats)
         print("Attack Stat:", self.attackstats)
-        print("Defense Stat:", self.defensestats)        
-        proceed = input("Do you wish to use your stat points?: ")
-        if proceed.lower() == "yes" and self.statpoints>0:
-            print("1 for Health, 2 for Attack, 3 for Defense, and q to Quit!")
-            while self.statpoints>0:
-                print("You have", self.statpoints,"statpoints!")
-                try:
-                    choice = input("\n")
-                    if choice == 'q':
-                        break
-                    elif int(choice) == 1:
-                        self.healthstats +=1
-                        self.statpoints-=1
-                        print("You have successfully added a statpoint into health!")
-                    elif int(choice) == 2:
-                        self.statpoints-=1
-                        self.attackstats +=1
-                        print("You have successfully added a statpoint into attack!")
-                    elif int(choice) == 3:
-                        self.statpoints-=1
-                        self.defensestats +=1
-                        print("You have successfully added a statpoint into defense!")
-                except (TypeError, ValueError) as e:
-                    print("Please enter q or an integer!")
-                    self.buffer()
-                else:
-                    print("Please try again later!")
+        print("Defense Stat:", self.defensestats)
+        q = True
+        while q and self.statpoints != 0:   
+            proceed = input("Do you wish to use your stat points?(q to quit): ")
+            if proceed.lower() == "q":
+                q = False
+            elif proceed.lower() == "yes" and self.statpoints>0:
+                print("1 for Health, 2 for Attack, 3 for Defense, and q to Quit!")
+                while self.statpoints>0:
+                    print("You have", self.statpoints,"statpoints!")
+                    try:
+                        choice = input("\n")
+                        if choice == 'q':
+                            break
+                        elif int(choice) == 1:
+                            self.healthstats +=1
+                            self.statpoints-=1
+                            print("You have successfully added a statpoint into health!")
+                        elif int(choice) == 2:
+                            self.statpoints-=1
+                            self.attackstats +=1
+                            print("You have successfully added a statpoint into attack!")
+                        elif int(choice) == 3:
+                            self.statpoints-=1
+                            self.defensestats +=1
+                            print("You have successfully added a statpoint into defense!")
+                    except (TypeError, ValueError) as e:
+                        print("Please enter q or an integer!")
+                        
+                    else:
+                        print("Please try again later!")
+            self.buffer()
     def buffer(self):
         self.maxhealth = round((self.healthstats*0.10)*35.0) + self.health
         self.attack = round((self.attackstats*0.15)*7.0) + self.baseattack
@@ -63,7 +69,7 @@ class Character():
 
     def DisplayStats(self):
         print("Name:", self.name)
-        print("Health:", self.health)
+        print("Health:", self.maxhealth)
         print("Attack:", self.attack)
         print("Defense:", self.defense)
         print("Accuracy:", self.accuracy,"%")
